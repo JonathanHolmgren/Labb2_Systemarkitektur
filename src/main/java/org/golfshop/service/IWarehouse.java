@@ -7,12 +7,13 @@ import org.golfshop.entities.ImmutableObjectProduct;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public interface IWarehouse {
 
 
-    public ArrayList<Product> getProductList();
+    public CopyOnWriteArrayList<Product> getProductList();
 
     public void showAll();
 

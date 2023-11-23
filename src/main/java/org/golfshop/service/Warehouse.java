@@ -1,41 +1,34 @@
 package org.golfshop.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.golfshop.entities.Category;
 import org.golfshop.entities.ImmutableObjectProduct;
 import org.golfshop.entities.Product;
+import org.golfshop.mapper.ProductMapper;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 import static org.golfshop.mockdata.MockData.getProducts;
 
 
+@ApplicationScoped
 public class Warehouse implements IWarehouse {
 
-    private ArrayList<Product> productList; // CopyOnWriteArrayList
+    private CopyOnWriteArrayList<Product> productList;
 
     public Warehouse() {
-        this.productList = new ArrayList<>(); // CopyOnWriteArrayList
+        productList = new CopyOnWriteArrayList<>();
     }
 
-
-    //Flytta till Immutable???
-    private ImmutableObjectProduct createImmutableObject(Product product) {
-        return new ImmutableObjectProduct(product.getId(),
-                product.getName(),
-                product.getPrice(),
-                product.getRating(),
-                product.getCategory(),
-                product.getCreatedDate(),
-                product.getLastmodified()
-        );
-    }
 
     @Override
-    public ArrayList<Product> getProductList() {
+    public CopyOnWriteArrayList<Product> getProductList() {
         return productList;
     }
 
@@ -102,14 +95,14 @@ public class Warehouse implements IWarehouse {
     @Override
     public List<ImmutableObjectProduct> getAllProduct() {
         return productList.stream()
-                .map(this::createImmutableObject)
+                .map(ProductMapper::ConvertToImmutableRecord)
                 .toList();
     }
     @Override
     public List<ImmutableObjectProduct> getProductById(int id) {
         return productList.stream()
                 .filter(product -> product.getId() == id)
-                .map(this::createImmutableObject)
+                .map(ProductMapper::ConvertToImmutableRecord)
                 .toList();
     }
     @Override
@@ -117,7 +110,7 @@ public class Warehouse implements IWarehouse {
         return productList.stream()
                 .filter(product -> product.getCategory().equals(category))
                 .sorted(Comparator.comparing(Product::getName))
-                .map(this::createImmutableObject)
+                .map(ProductMapper::ConvertToImmutableRecord)
                 .toList();
     }
     @Override
@@ -125,14 +118,14 @@ public class Warehouse implements IWarehouse {
         return productList.stream()
                 .filter(product -> product.getCreatedDate().isAfter(date))
                 .sorted(Comparator.comparing(Product::getCreatedDate).reversed())
-                .map(this::createImmutableObject)
+                .map(ProductMapper::ConvertToImmutableRecord)
                 .toList();
     }
     @Override
     public List<ImmutableObjectProduct> getProductThatHaveBeenModified() {
         return productList.stream()
                 .filter(product -> !product.getCreatedDate().isEqual(product.getLastmodified()))
-                .map(this::createImmutableObject)
+                .map(ProductMapper::ConvertToImmutableRecord)
                 .toList();
     }
 }

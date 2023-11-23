@@ -1,6 +1,7 @@
 package org.golfshop.entities;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public record ImmutableObjectProduct(
         int id,
@@ -8,7 +9,10 @@ public record ImmutableObjectProduct(
         double rating,
         double price,
         Category category,
-        LocalDate createdDate,
-        LocalDate lastmodified
+       String createdDate,
+        String lastmodified
 ) {
+
+
+
 }

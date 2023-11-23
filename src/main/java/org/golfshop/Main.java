@@ -30,7 +30,7 @@ public class  Main {
             exp1.forEach(System.out::println);
 
         //     getProductByCategorySortAfterName()
-        List<ImmutableObjectProduct> exp2 = example.getProductByCategorySortAfterName(Category.PUTTER);
+        List<ImmutableObjectProduct> exp2 = example.getProductByCategorySortAfterName(Category.valueOf("Putter".toUpperCase()));
             exp2.forEach(System.out::println);
 
         //    getProductAfterDesiredDateDescendingOrder()

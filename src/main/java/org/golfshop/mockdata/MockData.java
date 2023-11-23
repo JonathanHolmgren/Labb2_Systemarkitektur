@@ -5,12 +5,13 @@ import org.golfshop.entities.Product;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MockData {
 
-    private static ArrayList<Product> makeMockProducts() {
+    private static CopyOnWriteArrayList<Product> makeMockProducts() {
 
-        ArrayList<Product> productList = new ArrayList<>();
+        CopyOnWriteArrayList<Product> productList = new CopyOnWriteArrayList<>();
 
         productList.add(new Product(1, "T200 - Steel", 9, 9999, Category.IRONS, LocalDate.of(2022, 4, 12)));
         productList.add(new Product(2, "Mavrik 22 - Steel", 7, 5499, Category.IRONS, LocalDate.of(2022, 6, 30)));
@@ -25,7 +26,7 @@ public class MockData {
         return productList;
     }
 
-    public static ArrayList<Product> getProducts() {
+    public static CopyOnWriteArrayList<Product> getProducts() {
         return makeMockProducts();
     }
 
