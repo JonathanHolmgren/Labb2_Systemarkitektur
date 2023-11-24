@@ -135,7 +135,7 @@ public class WarehouseResourceTest {
     //@Test
     public void whenAddProductAndCorrectProductShouldBeReturn() throws Exception {
         MockHttpRequest request = MockHttpRequest.post("/products");
-        String json = new ObjectMapper().writeValueAsString(new NewProduct("Kalle", 18,34, "Irons","2023-11-24","2023-11-24"));
+        String json = new ObjectMapper().writeValueAsString(new NewProduct("T200 - Steel", 18,34, "Irons","2023-11-24","2023-11-24"));
         request.content(json.getBytes());
         request.contentType(MediaType.APPLICATION_JSON);
         MockHttpResponse response = new MockHttpResponse();
