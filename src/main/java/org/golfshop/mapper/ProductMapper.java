@@ -8,7 +8,8 @@ import java.time.format.DateTimeFormatter;
 public class ProductMapper {
 
     public static ImmutableObjectProduct ConvertToImmutableRecord(Product product) {
-        return new ImmutableObjectProduct(product.getId(),
+        return new ImmutableObjectProduct(
+                product.getId(),
                 product.getName(),
                 product.getPrice(),
                 product.getRating(),

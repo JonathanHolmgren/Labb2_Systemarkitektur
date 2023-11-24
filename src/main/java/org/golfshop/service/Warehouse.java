@@ -7,28 +7,27 @@ import org.golfshop.entities.Product;
 import org.golfshop.mapper.ProductMapper;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 import static org.golfshop.mockdata.MockData.getProducts;
+import static org.golfshop.service.GenerateId.generateNewId;
 
 
 @ApplicationScoped
 public class Warehouse implements IWarehouse {
 
-    private CopyOnWriteArrayList<Product> productList;
+    private static CopyOnWriteArrayList<Product> productList;
 
     public Warehouse() {
         productList = new CopyOnWriteArrayList<>();
     }
 
 
-    @Override
-    public CopyOnWriteArrayList<Product> getProductList() {
+
+    public static CopyOnWriteArrayList<Product> getProductList() {
         return productList;
     }
 
@@ -53,19 +52,7 @@ public class Warehouse implements IWarehouse {
     public void addMockDateToWarehouse() {
         this.productList = getProducts();
     }
-    @Override
-    public int generateNewId() {
 
-        int id = productList.stream()
-                .mapToInt(Product::getId)
-                .max()
-                .orElse(0);
-
-        if (id < 1) id = 1;
-        else id = id + 1;
-
-        return id;
-    }
     @Override
     public void createANewProduct(String name, double rating, double price, Category category) {
 
@@ -99,11 +86,10 @@ public class Warehouse implements IWarehouse {
                 .toList();
     }
     @Override
-    public List<ImmutableObjectProduct> getProductById(int id) {
+    public Optional<ImmutableObjectProduct> getProductById(int id) {
         return productList.stream()
                 .filter(product -> product.getId() == id)
-                .map(ProductMapper::ConvertToImmutableRecord)
-                .toList();
+                .map(ProductMapper::ConvertToImmutableRecord).findFirst();
     }
     @Override
     public List<ImmutableObjectProduct> getProductByCategorySortAfterName(Category category) {

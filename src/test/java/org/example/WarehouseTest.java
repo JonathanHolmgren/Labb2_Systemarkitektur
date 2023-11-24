@@ -7,22 +7,21 @@ import org.golfshop.service.Warehouse;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static java.util.Collections.reverseOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class WarehouseTest {
 
+    Warehouse warehouseTest = new Warehouse();
 
-    @Test // Kanske lite onödig
+    @Test
     public void IsWarehouseEmpty() {
-        Warehouse warehouseTest = new Warehouse();
+
         CopyOnWriteArrayList<Product> productList = warehouseTest.getProductList();
 
         assertThat(productList)
@@ -31,7 +30,6 @@ public class WarehouseTest {
 
     @Test
     public void whenWeCreateAProductTheListShouldNotBeEmpty() {
-        Warehouse warehouseTest = new Warehouse();
         warehouseTest.createANewProduct("Test Putter", 9, 3999, Category.PUTTER);
         CopyOnWriteArrayList<Product> productList = warehouseTest.getProductList();
 
@@ -41,7 +39,6 @@ public class WarehouseTest {
 
     @Test
     public void giveAnEmptyNameThrowException() {
-        Warehouse warehouseTest = new Warehouse();
 
         assertThrows(IllegalArgumentException.class, () -> {
             warehouseTest.createANewProduct("", 9, 3, Category.IRONS);
@@ -50,7 +47,6 @@ public class WarehouseTest {
 
     @Test
     public void giveNegativePriceThrowException() {
-        Warehouse warehouseTest = new Warehouse();
 
         assertThrows(IllegalArgumentException.class, () -> {
             warehouseTest.createANewProduct("gffg", 9, -3, Category.IRONS);
@@ -59,7 +55,6 @@ public class WarehouseTest {
 
     @Test
     public void WhenYouUpdateAnProductTheUpdatedVersionShouldChangeToChangedValue() {
-        Warehouse warehouseTest = new Warehouse();
         warehouseTest.createANewProduct("Test Putter", 9, 3999, Category.PUTTER);
         warehouseTest.updateAnExistingProduct(1, "NewName", 8, Category.IRONS);
         CopyOnWriteArrayList<Product> productList = warehouseTest.getProductList();
@@ -73,10 +68,8 @@ public class WarehouseTest {
     }
 
 
-
     @Test
     public void WhenUpdateAProductAndGivenAnEmptyNameThrowException() {
-        Warehouse warehouseTest = new Warehouse();
 
         assertThrows(IllegalArgumentException.class, () -> {
             warehouseTest.updateAnExistingProduct(1, "", 3, Category.IRONS);
@@ -85,7 +78,6 @@ public class WarehouseTest {
 
     @Test
     public void CheckIfYouGetAllProductFromWareHouse() {
-        Warehouse warehouseTest = new Warehouse();
         warehouseTest.createANewProduct("Test Putter", 9, 3999, Category.PUTTER);
         warehouseTest.createANewProduct("Test Driver", 9, 3999, Category.DRIVER);
 
@@ -95,7 +87,6 @@ public class WarehouseTest {
 
     @Test
     public void ShouldReturnAllPutters() {
-        Warehouse warehouseTest = new Warehouse();
         warehouseTest.addMockDateToWarehouse();
         List<ImmutableObjectProduct> productList = warehouseTest.getProductByCategorySortAfterName(Category.PUTTER);
 
@@ -104,7 +95,6 @@ public class WarehouseTest {
 
     @Test
     public void returnSameCategorySortedByTheNameFromATOZ() {
-        Warehouse warehouseTest = new Warehouse();
         warehouseTest.addMockDateToWarehouse();
 
         assertThat(warehouseTest.getProductByCategorySortAfterName(Category.PUTTER).get(0).name()).startsWith("Sp");
@@ -123,7 +113,6 @@ public class WarehouseTest {
 
     @Test
     public void getProductAfterDesiredDateShouldBeInDescendingOrder() {
-        Warehouse warehouseTest = new Warehouse();
         warehouseTest.addMockDateToWarehouse();
 
         LocalDate desiredDate = LocalDate.of(2023, 9, 23);
@@ -133,7 +122,6 @@ public class WarehouseTest {
 
     @Test
     public void ShouldOnlyReturnProductThatBeenModified() {
-        Warehouse warehouseTest = new Warehouse();
         warehouseTest.addMockDateToWarehouse();
 
         assertThat(warehouseTest.getProductThatHaveBeenModified().size()).isEqualTo(6);

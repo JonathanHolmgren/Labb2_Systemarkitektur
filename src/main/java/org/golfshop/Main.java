@@ -1,11 +1,9 @@
 package org.golfshop;
 
-import org.golfshop.entities.Category;
 import org.golfshop.entities.ImmutableObjectProduct;
 import org.golfshop.service.Warehouse;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Optional;
 
 
 public class  Main {
@@ -21,25 +19,25 @@ public class  Main {
 
 
         // getAllProduct()
-        List<ImmutableObjectProduct> exp = example.getAllProduct();
-        exp.forEach(System.out::println);
+       // List<ImmutableObjectProduct> exp = example.getAllProduct();
+       // exp.forEach(System.out::println);
 
 
         // getProductById()
-        List<ImmutableObjectProduct> exp1 = example.getProductById(8);
-            exp1.forEach(System.out::println);
+        Optional<ImmutableObjectProduct> exp1 = example.getProductById(8);
+        System.out.println(exp1);
 
         //     getProductByCategorySortAfterName()
-        List<ImmutableObjectProduct> exp2 = example.getProductByCategorySortAfterName(Category.valueOf("Putter".toUpperCase()));
-            exp2.forEach(System.out::println);
+       // List<ImmutableObjectProduct> exp2 = example.getProductByCategorySortAfterName(Category.valueOf("Putter".toUpperCase()));
+        //    exp2.forEach(System.out::println);
 
         //    getProductAfterDesiredDateDescendingOrder()
-        List<ImmutableObjectProduct> exp3 = example.getProductAfterDesiredDateDescendingOrder(LocalDate.of(2023, 9, 23));
-            exp3.forEach(System.out::println);
+       // List<ImmutableObjectProduct> exp3 = example.getProductAfterDesiredDateDescendingOrder(LocalDate.of(2023, 9, 23));
+          //  exp3.forEach(System.out::println);
 
         //     getProductThatHaveBeenModified()
-        List<ImmutableObjectProduct> exp4 = example.getProductThatHaveBeenModified();
-            exp4.forEach(System.out::println);
+      //  List<ImmutableObjectProduct> exp4 = example.getProductThatHaveBeenModified();
+         //   exp4.forEach(System.out::println);
 
 
     }

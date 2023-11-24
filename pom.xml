@@ -57,6 +57,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-core</artifactId>
+            <version>6.2.4.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.core.version}</version>
@@ -85,6 +91,18 @@
             <version>3.0.2</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>uk.org.webcompere</groupId>
+            <artifactId>model-assert</artifactId>
+            <version>1.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.14.1</version> <!-- Use the latest version available -->
+        </dependency>
+
 
     </dependencies>
 

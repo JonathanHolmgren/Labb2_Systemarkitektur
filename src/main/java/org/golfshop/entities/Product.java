@@ -6,9 +6,16 @@ import java.time.LocalDate;
 public class Product {
 
     private int id;
+
+
     private String name;
+
+
     private double rating;
+
+
     private double price;
+
     private Category category;
     private final LocalDate createdDate;
     private LocalDate lastmodified;
@@ -97,4 +104,16 @@ public class Product {
         this.lastmodified = lastmodified;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", rating=" + rating +
+                ", price=" + price +
+                ", category=" + category +
+                ", createdDate=" + createdDate +
+                ", lastmodified=" + lastmodified +
+                '}';
+    }
 }
